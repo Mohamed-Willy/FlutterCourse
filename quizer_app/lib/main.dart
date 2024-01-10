@@ -30,16 +30,44 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  List<Widget> scoreKeeper = [];
+  List<String> questions = [
+    "Is the Earth round?",
+    "Can dogs fly?",
+    "Are bananas a type of fruit?",
+    "Is the sun a source of light?",
+    "Do humans have gills?",
+    "Is water wet?",
+    "Can birds swim?",
+    "Is the moon made of cheese?",
+    "Does gravity exist?",
+    "Can plants photosynthesize?",
+    "Congratulations You Finished!"
+  ];
+  List<bool> answers = [
+    true,
+    false,
+    true,
+    true,
+    false,
+    false,
+    true,
+    false,
+    true,
+    true
+  ];
+  int index = 0;
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        const Expanded(
+        Expanded(
           child: Center(
             child: Text(
-              "This is the question",
-              style: TextStyle(
+              questions[index],
+              textAlign: TextAlign.center,
+              style: const TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
                 fontSize: 40,
@@ -52,7 +80,29 @@ class _HomePageState extends State<HomePage> {
           child: SizedBox(
             height: 80,
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                if (answers[index] && index < questions.length -1) {
+                  scoreKeeper.add(
+                    const Icon(
+                      Icons.check,
+                      color: Colors.lightGreenAccent,
+                    ),
+                  );
+                }
+                else if (index < questions.length -1){
+                  scoreKeeper.add(
+                    const Icon(
+                      Icons.close,
+                      color: Colors.redAccent,
+                    ),
+                  );
+                }
+                setState(() {
+                  if(index < questions.length - 1) {
+                    index++;
+                  }
+                });
+              },
               style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.lightGreenAccent,
                   shape: RoundedRectangleBorder(
@@ -73,7 +123,29 @@ class _HomePageState extends State<HomePage> {
           child: SizedBox(
             height: 80,
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                if (!answers[index] && index < questions.length -1) {
+                  scoreKeeper.add(
+                    const Icon(
+                      Icons.check,
+                      color: Colors.lightGreenAccent,
+                    ),
+                  );
+                }
+                else if (index < questions.length -1){
+                  scoreKeeper.add(
+                    const Icon(
+                      Icons.close,
+                      color: Colors.redAccent,
+                    ),
+                  );
+                }
+                setState(() {
+                  if(index < questions.length - 1) {
+                    index++;
+                  }
+                });
+              },
               style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.redAccent,
                   shape: RoundedRectangleBorder(
@@ -89,6 +161,9 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
         ),
+        Row(
+          children: scoreKeeper,
+        )
       ],
     );
   }
