@@ -1,3 +1,4 @@
+import 'CustomCard.dart';
 import 'package:flutter/material.dart';
 
 class InputPage extends StatefulWidget {
@@ -14,21 +15,33 @@ class _InputPageState extends State<InputPage> {
       appBar: AppBar(
         title: const Text("BMI CALCULATOR"),
       ),
-      body: const Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
+      body: Column(
+        children: [
+          const Expanded(
+            child: Row(
+              children: [
+                CustomCard(),
+                CustomCard(),
+              ],
             ),
-          ],
-        ),
+          ),
+          const CustomCard(),
+          const Expanded(
+            child: Row(
+              children: [
+                CustomCard(),
+                CustomCard(),
+              ],
+            ),
+          ),
+          Container(
+            color: const Color(0xFFeb1555),
+            margin: const EdgeInsets.only(top: 10),
+            width: double.infinity,
+            height: 80.0,
+          )
+        ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: (){},
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
