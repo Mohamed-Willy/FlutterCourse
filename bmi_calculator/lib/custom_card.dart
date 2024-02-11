@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
-const customCardColor = Color(0xFF1D1E33);
+const activeCardColor = Color(0xFF1D1E33);
+const inActiveCardColor = Color(0xFF111328);
 
 class CustomCard extends StatelessWidget {
-  const CustomCard({super.key, this.color = customCardColor});
+  const CustomCard({super.key, this.cardChild = const Text(""), this.color = activeCardColor});
   final Color color;
+  final Widget cardChild;
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -13,6 +15,9 @@ class CustomCard extends StatelessWidget {
         decoration: BoxDecoration(
           color: color,
           borderRadius: BorderRadius.circular(20),
+        ),
+        child: Center(
+          child: cardChild,
         ),
       ),
     );
