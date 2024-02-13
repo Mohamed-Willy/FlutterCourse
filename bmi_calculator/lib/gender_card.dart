@@ -1,11 +1,13 @@
+import 'package:bmi_calculator/constants.dart';
 import 'package:flutter/material.dart';
 import 'custom_card.dart';
 
 class GenderCard extends StatelessWidget {
-  const GenderCard({super.key, required this.icon, required this.text, this.color = inActiveCardColor});
+  const GenderCard({super.key, required this.icon, required this.text, this.onPress, required this.color});
   final IconData icon;
   final String text;
   final Color color;
+  final Function()? onPress;
   @override
   Widget build(BuildContext context) {
     return CustomCard(
@@ -22,13 +24,11 @@ class GenderCard extends StatelessWidget {
           ),
           Text(
             text,
-            style: const TextStyle(
-              fontSize: 18,
-              color: Color(0xFF8D8E98),
-            ),
+            style: kLabelTextStyle
           ),
         ],
       ),
+      onClick: onPress,
     );
   }
 }
