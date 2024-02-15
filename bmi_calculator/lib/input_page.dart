@@ -1,5 +1,7 @@
+import 'package:bmi_calculator/calculator_logic.dart';
 import 'package:bmi_calculator/gender_card.dart';
 import 'package:bmi_calculator/numeric_card.dart';
+import 'bottom_button.dart';
 import 'constants.dart';
 import 'custom_card.dart';
 import 'package:flutter/material.dart';
@@ -142,19 +144,19 @@ class _InputPageState extends State<InputPage> {
               ],
             ),
           ),
-          GestureDetector(
-            onTap: () {
+          BottomButton(
+            title: "CALCULATE",
+              onClick: () {
+              CalculatorLogic bmi = CalculatorLogic(weight: weight, height: height);
+              finalScore = bmi.calculateBMI();
+              finalTitle = bmi.getResult().toUpperCase();
+              finalTitleColor = (finalTitle == "NORMAL")? const Color(0xFF24D876): const Color(0xFFFF2222);
+              finalDescription = bmi.getAdvise();
               Navigator.pushNamed(
                 context,
                 '/result',
               );
-            },
-            child: Container(
-              color: const Color(0xFFeb1555),
-              margin: const EdgeInsets.only(top: 10),
-              width: double.infinity,
-              height: 60.0,
-            ),
+            }
           ),
         ],
       ),
