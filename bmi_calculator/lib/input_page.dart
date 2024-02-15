@@ -1,4 +1,5 @@
 import 'package:bmi_calculator/gender_card.dart';
+import 'package:bmi_calculator/numeric_card.dart';
 import 'constants.dart';
 import 'custom_card.dart';
 import 'package:flutter/material.dart';
@@ -10,14 +11,15 @@ enum Gender {
 }
 
 class InputPage extends StatefulWidget {
-  const InputPage({super.key, required this.title});
-  final String title;
+  const InputPage({super.key});
   @override
   State<InputPage> createState() => _InputPageState();
 }
 
 class _InputPageState extends State<InputPage> {
-  int height = 180;
+  int height = 185;
+  int weight = 90;
+  int age = 22;
   Gender? gender;
   @override
   Widget build(BuildContext context) {
@@ -106,19 +108,53 @@ class _InputPageState extends State<InputPage> {
               ],
             ),
           ),
-          const Expanded(
+          Expanded(
             child: Row(
               children: [
-                CustomCard(),
-                CustomCard(),
+                NumericCard(
+                  title: "WEIGHT",
+                  value: weight,
+                  onMinusPress: () {
+                    setState(() {
+                      weight--;
+                    });
+                  },
+                  onPlusPress: () {
+                    setState(() {
+                      weight++;
+                    });
+                  },
+                ),
+                NumericCard(
+                  title: "AGE",
+                  value: age,
+                  onMinusPress: () {
+                    setState(() {
+                      age--;
+                    });
+                  },
+                  onPlusPress: () {
+                    setState(() {
+                      age++;
+                    });
+                  },
+                ),
               ],
             ),
           ),
-          Container(
-            color: const Color(0xFFeb1555),
-            margin: const EdgeInsets.only(top: 10),
-            width: double.infinity,
-            height: 60.0,
+          GestureDetector(
+            onTap: () {
+              Navigator.pushNamed(
+                context,
+                '/result',
+              );
+            },
+            child: Container(
+              color: const Color(0xFFeb1555),
+              margin: const EdgeInsets.only(top: 10),
+              width: double.infinity,
+              height: 60.0,
+            ),
           ),
         ],
       ),
